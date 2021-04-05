@@ -10,5 +10,10 @@ public class Shop {
         p1.setId(1l);
         p1.setName("Tea");
         p1.setPrice(BigDecimal.valueOf(3.99));
+        printProduct(p1);
+    }
+
+    private static void printProduct(Product p1) {
+        System.out.println(p1.getId() + " " + p1.getName() + " " + p1.getPrice() + " " + p1.getDiscount());
     }
 }
