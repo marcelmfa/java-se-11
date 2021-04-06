@@ -40,3 +40,12 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Remover métodos **set** das propriedades de Product;
 - Criar método **applyRating** para criar um objeto clone de Product com o novo *rating* passado por parâmetro;
 - Refatorar Shop e criar um novo objeto de Produtor a partir de um já criado com um novo rating.
+
+### 6. Especializações de Produto
+
+- Criar classe Drink extendendo de Product;
+  - Incluir propriedade **bestBefore** do tipo data e o respectivo método **get**;
+  - Criar construtor com todas as propriedades;
+- Criar classe Food extendendo de Product;
+  - Criar construtor com todas as propriedades;
+- Criar objetos Food e Drink em Shop.
