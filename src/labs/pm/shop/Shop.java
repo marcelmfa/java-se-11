@@ -1,20 +1,25 @@
 package labs.pm.shop;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import labs.pm.data.Drink;
+import labs.pm.data.Food;
 import labs.pm.data.Product;
 import labs.pm.data.Rating;
 
 public class Shop {
     public static void main(String[] args) {
-        Product p1 = new Product(1l, "Tea", BigDecimal.valueOf(3.99), Rating.THREE_STARS);
-        Product p2 = new Product(1l, "Coffee", BigDecimal.valueOf(4.99), Rating.FOUR_STARS);
-        Product p3 = new Product(1l, "Chocolate", BigDecimal.valueOf(5.99), Rating.FIVE_STARS);
+        Product p1 = new Drink(1l, "Tea", BigDecimal.valueOf(3.99), Rating.THREE_STARS);
+        Product p2 = new Drink(1l, "Coffee", BigDecimal.valueOf(4.99), Rating.FOUR_STARS);
+        Product p3 = new Food(1l, "Chocolate", BigDecimal.valueOf(5.99), Rating.FIVE_STARS, LocalDate.now().plusDays(100l));
         Product p4 = p1.applyRating(Rating.ONE_STAR);
+        Product p5 = new Product(1l, "Salt", BigDecimal.valueOf(0.05));
         printProduct(p1);
         printProduct(p2);
         printProduct(p3);
         printProduct(p4);
+        printProduct(p5);
     }
 
     private static void printProduct(Product p1) {
