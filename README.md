@@ -6,10 +6,8 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 4. Criar construtores *customizados*
+### 5. Tornar objetos Product *immutable* (imutáveis)
 
-- Criar construtor de Product com todas as propriedades;
-- Criar construtor de Product com todas as propriedades, exceto rating, e referenciando o construtor anterior;
-- (Opcional) Alterar import's de enumerações para import static;
-- Refatorar Shop para construir corretamente os objetos do tipo Product;
-- (Opcional) Criar vários objetos Product e imprimir os valores de duas propriedades.
+- Remover métodos **set** das propriedades de Product;
+- Criar método **applyRating** para criar um objeto clone de Product com o novo *rating* passado por parâmetro;
+- Refatorar Shop e criar um novo objeto de Produtor a partir de um já criado com um novo rating.
