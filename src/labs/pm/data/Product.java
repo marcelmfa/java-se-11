@@ -13,6 +13,8 @@ public class Product {
 
     private BigDecimal price;
 
+    private Rating rating;
+
     public long getId() {
         return id;
     }
@@ -39,5 +41,9 @@ public class Product {
 
     public BigDecimal getDiscount() {
         return price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 }
