@@ -6,11 +6,6 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 1. Criar classes inciais
-
-- Criar uma classe para representar um Produto (Product) com as seguintes propriedades: identificador, nome e preço e seus respectivos métodos **get** e **set**;
-- Criar uma classe para representar um compra (Shop) onde serão criados vários objetos de Produto.
-
 ### 2. Ajustar classe Produto
 
 - Em Produto:
