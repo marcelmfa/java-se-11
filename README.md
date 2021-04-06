@@ -34,3 +34,9 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - (Opcional) Alterar import's de enumerações para import static;
 - Refatorar Shop para construir corretamente os objetos do tipo Product;
 - (Opcional) Criar vários objetos Product e imprimir os valores de duas propriedades.
+
+### 5. Tornar objetos Product *immutable* (imutáveis)
+
+- Remover métodos **set** das propriedades de Product;
+- Criar método **applyRating** para criar um objeto clone de Product com o novo *rating* passado por parâmetro;
+- Refatorar Shop e criar um novo objeto de Produtor a partir de um já criado com um novo rating.
