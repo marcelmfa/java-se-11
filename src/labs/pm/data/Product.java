@@ -15,6 +15,17 @@ public class Product {
 
     private Rating rating;
 
+    public Product(long id, String name, BigDecimal price) {
+        this(id, name, price, Rating.NOT_RATED);
+    }
+
+    public Product(long id, String name, BigDecimal price, Rating rating) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+    }
+
     public long getId() {
         return id;
     }
@@ -43,7 +54,8 @@ public class Product {
         return price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
     }
 
-    public Rating getRating() {
-        return rating;
+    public String getRating() {
+        return rating.getStars();
     }
+    
 }
