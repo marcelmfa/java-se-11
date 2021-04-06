@@ -44,8 +44,13 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 ### 6. Especializações de Produto
 
 - Criar classe Drink extendendo de Product;
-  - Incluir propriedade **bestBefore** do tipo data e o respectivo método **get**;
+  - Incluir propriedade data de valida (**bestBefore**) e o respectivo método **get**;
   - Criar construtor com todas as propriedades;
 - Criar classe Food extendendo de Product;
   - Criar construtor com todas as propriedades;
 - Criar objetos Food e Drink em Shop.
+
+### 7. Sobrescrevendo (override) métodos e polimorfismo (polymorphism)
+
+- Sobrescrever método toString em Product e Food;
+- Refatorar Shop pra imprimir o objeto em si ao invés de construir uma String.
