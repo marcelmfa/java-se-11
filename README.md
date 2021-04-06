@@ -6,11 +6,7 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 6. Especializações de Produto
+### 7. Sobrescrevendo (override) métodos e polimorfismo (polymorphism)
 
-- Criar classe Drink extendendo de Product;
-  - Incluir propriedade data de validade (**bestBefore**) e o respectivo método **get**;
-  - Criar construtor com todas as propriedades;
-- Criar classe Food extendendo de Product;
-  - Criar construtor com todas as propriedades;
-- Criar objetos Food e Drink em Shop.
+- Sobrescrever método toString em Product e Food;
+- Refatorar Shop pra imprimir o objeto em si ao invés de construir uma String.

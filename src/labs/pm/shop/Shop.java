@@ -23,6 +23,6 @@ public class Shop {
     }
 
     private static void printProduct(Product p1) {
-        System.out.println(p1.getId() + " " + p1.getName() + " " + p1.getPrice() + " " + p1.getDiscount() + " " + p1.getRating());
+        System.out.println(p1);
     }
 }
