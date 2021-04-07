@@ -22,4 +22,5 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Tornar Product uma classe abstrata;
 - Tornar o método **applyRating** abstrato;
 - Realizar as devidas correções;
-- (Opcional) Criar mais objetos Drink e Product em Shop.
+- Criar método **getBestBefore** em Product e retornando data corrente;
+- (Opcional) Criar mais objetos Drink e Product.

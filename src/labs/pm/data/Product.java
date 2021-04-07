@@ -2,6 +2,7 @@ package labs.pm.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 
 public abstract class Product {
 
@@ -47,6 +48,10 @@ public abstract class Product {
     }
 
     public abstract Product applyRating(Rating rating);
+
+    public LocalDate getBestBefore() {
+        return LocalDate.now();
+    }
 
     @Override
     public String toString() {
