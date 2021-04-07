@@ -7,8 +7,12 @@ public class Food extends Product {
     
     private LocalDate bestBefore;
 
-    public Food(long id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
+    public Food(long id, String name, BigDecimal price, Rating rating) {
         super(id, name, price, rating);
+    }
+
+    public Food(long id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
+        this(id, name, price, rating);
         this.bestBefore = bestBefore;
     }
 
@@ -17,11 +21,17 @@ public class Food extends Product {
     }
     @Override
     public String toString() {
+        if (bestBefore == null) {
+            return super.toString();
+        }
         return super.toString() + ", " + this.bestBefore;
     }
 
     @Override
     public BigDecimal getDiscount() {        
+        if (bestBefore == null) {
+            return BigDecimal.ZERO;
+        }
         LocalDate now = LocalDate.now();
         return now.isEqual(bestBefore) || now.isAfter(bestBefore) ? super.getDiscount() : BigDecimal.ZERO;
     }

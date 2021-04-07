@@ -14,7 +14,7 @@ public class Shop {
         Product p2 = new Drink(1l, "Coffee", BigDecimal.valueOf(4.99), Rating.FOUR_STARS);
         Product p3 = new Food(1l, "Chocolate", BigDecimal.valueOf(5.99), Rating.FIVE_STARS, LocalDate.now().plusDays(100l));
         Product p4 = p1.applyRating(Rating.ONE_STAR);
-        Product p5 = new Product(1l, "Salt", BigDecimal.valueOf(0.05));
+        Product p5 = new Food(1l, "Salt", BigDecimal.valueOf(0.05), Rating.NOT_RATED);
         printProduct(p1);
         printProduct(p2);
         printProduct(p3);

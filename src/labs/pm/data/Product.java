@@ -3,7 +3,7 @@ package labs.pm.data;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Product {
+public abstract class Product {
 
     private static final BigDecimal DISCOUNT_RATE = BigDecimal.valueOf(0.1);
 
@@ -46,9 +46,7 @@ public class Product {
         return rating.getStars();
     }
 
-    public Product applyRating(Rating rating) {
-        return new Product(this.id, this.name, this.price, rating);
-    }
+    public abstract Product applyRating(Rating rating);
 
     @Override
     public String toString() {
