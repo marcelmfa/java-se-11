@@ -19,4 +19,15 @@ public class Food extends Product {
     public String toString() {
         return super.toString() + ", " + this.bestBefore;
     }
+
+    @Override
+    public BigDecimal getDiscount() {        
+        LocalDate now = LocalDate.now();
+        return now.isEqual(bestBefore) || now.isAfter(bestBefore) ? super.getDiscount() : BigDecimal.ZERO;
+    }
+
+    @Override
+    public Product applyRating(Rating rating) {
+        return new Food(this.getId(), this.getName(), this.getPrice(), rating, bestBefore);
+    }
 }

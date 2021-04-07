@@ -55,4 +55,29 @@ public class Product {
         return id + " " + name + " " + price + " " + this.getDiscount() + " " + this.getRating();
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        // Checking class name
+        // if (obj != null && getClass() != obj.getClass()){
+
+        // Checking inheritance only
+        if (obj instanceof Product) {
+            final Product other = (Product) obj;
+            return this.id == other.id;
+        }        
+        return false;
+    }
+
+    
 }
