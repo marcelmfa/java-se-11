@@ -69,7 +69,7 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Criar método **getBestBefore** em Product e retornando data corrente;
 - (Opcional) Criar mais objetos Drink e Product.
 
-- 9. Criando objetos Fábrica (Factory)
+### 9. Criando objetos Fábrica (Factory)
 
 - Criar classe ProductManager que será responsável por criar instâncias de Product;
 - Criar um método para criar um objeto Drink;
