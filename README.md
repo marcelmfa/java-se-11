@@ -60,3 +60,10 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
   - Em Food para retornar o desconto da super classe caso esteja no dia da data de validade ou após, caso contrário zero;
 - Sobrescrever método **applyRating** para criar clones dos objetos Food e Drink;
 - (Opcional) Refatorar Shop e criar novos objetos Food e Drink e averiguar o uso do polimorfismo.
+
+### 8. Classes abstratas e métodos abstratos
+
+- Tornar Product uma classe abstrata;
+- Tornar o método **applyRating** abstrato;
+- Realizar as devidas correções;
+- (Opcional) Criar mais objetos Drink e Product.
