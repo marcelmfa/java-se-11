@@ -74,5 +74,17 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Criar classe ProductManager que será responsável por criar instâncias de Product;
 - Criar um método para criar um objeto Drink;
 - Criar um método para criar um objeto Food.
-- Modificar os construtores de Food, Product de public para *default*;
+- Modificar os construtores de Food, Product e Drink de public para *default*;
 - Refatorar a criação de objetos em Shop.
+
+### 10. Desenhando Interfaces e refatorando o código
+
+- Criar uma interface genérica Avaliavel (Rateable);
+  - Criar constante para avaliação padrão (default rating) com valor não avaliado (NOT_RATED) da enumeração;
+  - Criar método **applyRating** tendo Rating como parâmetro retornando o tipo genérico;
+  - Criar método default - isto é, com implementação - **getRating** retornando o valor da avaliação padrão;
+  - Criar método estático **convert** para obter uma enumeração a partir do número de estrelas informado;
+  - Criar método default **applyRating** passando o número de estrelas de avaliação;
+  - (Opcional) Colocar a anotação FunctionalInterface;
+- Fazer a classe Product implementar Rateable;
+  - (Opcional) Remover códigos desnecessários que já estão em Rateable.
