@@ -11,7 +11,7 @@ public class Drink extends Product {
     private static final LocalTime START_HAPPY_HOUR = LocalTime.of(17, 30);
     private static final LocalTime END_HAPPY_HOUR = LocalTime.of(18, 30);
 
-    public Drink(long id, String name, BigDecimal price, Rating rating) {
+    Drink(long id, String name, BigDecimal price, Rating rating) {
         super(id, name, price, rating);
     }
    

@@ -16,11 +16,11 @@ public abstract class Product {
 
     private Rating rating;
 
-    public Product(long id, String name, BigDecimal price) {
+    Product(long id, String name, BigDecimal price) {
         this(id, name, price, Rating.NOT_RATED);
     }
 
-    public Product(long id, String name, BigDecimal price, Rating rating) {
+    Product(long id, String name, BigDecimal price, Rating rating) {
         this.id = id;
         this.name = name;
         this.price = price;
