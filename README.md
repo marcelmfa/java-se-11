@@ -101,4 +101,11 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
   - Criar método para criação de Review;
   - Criar propriedades para Locale, ResourceBundle, DateTimeFormatter e NumberFormat;
   - Criar construtor com Locale como parametro e inicializar as propriedades acima;
+  - Criar construtor vazio reutilizando o construtor anterior e passando o Locale *default*;
   - Criar método **printProductReport** para imprimir as mensagens customizadas;
+
+### 12. Refatorar Shop (Opcional)
+
+- Criar vários objetos ProductManagers com diferentes Locale;
+- Criar vários objetos Product e Review's;
+- Imprimir os relatórios (report) de cada ProductManager.
