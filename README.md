@@ -6,14 +6,17 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 10. Desenhando Interfaces e refatorando o código
+### 11. Habilitando resenha de produtos e avaliação
 
-- Criar uma interface genérica Avaliavel (Rateable);
-  - Criar constante para avaliação padrão (default rating) com valor não avaliado (NOT_RATED) da enumeração;
-  - Criar método **applyRating** tendo Rating como parâmetro retornando o tipo genérico;
-  - Criar método default - isto é, com implementação - **getRating** retornando o valor da avaliação padrão;
-  - Criar método estático **convert** para obter uma enumeração a partir do número de estrelas informado;
-  - Criar método default **applyRating** passando o número de estrelas de avaliação;
-  - (Opcional) Colocar a anotação FunctionalInterface;
-- Fazer a classe Product implementar Rateable;
-  - (Opcional) Remover códigos desnecessários que já estão em Rateable.
+- Criar classe Resenha (Review) com os atributos Review e comentários (comments) assim como seus respectivos *getters* e *setters*;
+- Criar arquivo de propriedades para mensagens customizadas com nome **resouces.properties** com as seguintes mensagens:
+  - {0}, Price: {1}, Rating: {2}, Best Before: {3}
+  - Review: {0}\t{1}
+  - Not reviewed
+- Refatorar ProductManager:
+  - Manter estado de Product e Review;
+  - Criar método para criação de Review;
+  - Criar propriedades para Locale, ResourceBundle, DateTimeFormatter e NumberFormat;
+  - Criar construtor com Locale como parametro e inicializar as propriedades acima;
+  - Criar construtor vazio reutilizando o construtor anterior e passando o Locale *default*;
+  - Criar método **printProductReport** para imprimir as mensagens customizadas;
