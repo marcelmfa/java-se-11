@@ -57,8 +57,8 @@ public class ProductManager {
             .append("\n");
         
         String reviewMsg = review == null
-            ? MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments())
-            : bundle.getString("review.not");
+            ? bundle.getString("review.not")
+            : MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments());
         buffer.append(reviewMsg)
             .append("\n");
         
