@@ -109,3 +109,9 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Criar vários objetos ProductManagers com diferentes Locale;
 - Criar vários objetos Product e Review's;
 - Imprimir os relatórios (report) de cada ProductManager.
+
+### 13. Permitindo múltiplas resenhas para um produto
+
+- Modificar em ProductManager a propriedade **review** de objeto para array;
+- Refatorar o método **reviewProduct** para incluir os reviews no array e com funcionalidade de autoscaling deste array;
+- Refatorar para aplicar a média das avaliações como avaliação em Product.
