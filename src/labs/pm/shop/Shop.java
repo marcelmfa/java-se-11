@@ -12,7 +12,7 @@ import labs.pm.data.Rating;
 
 public class Shop {
     public static void main(String[] args) {
-        
+
         ProductManager pm = new ProductManager(Locale.US);
         pm.createProduct(1l, "Beer light", BigDecimal.valueOf(3.99), Rating.THREE_STARS);
         pm.printProductReport();
@@ -21,6 +21,7 @@ public class Shop {
         Product p2 = pm2.createProduct(1l, "Imperial Stout Beer", BigDecimal.valueOf(5.99), Rating.FOUR_STARS);
         pm2.printProductReport();
         pm2.reviewProduct(p2, Rating.FIVE_STARS, "Nice beer after a long work day");
+        pm2.reviewProduct(p2, Rating.ONE_STAR, "Too strong for me");
         pm2.printProductReport();
     }
 

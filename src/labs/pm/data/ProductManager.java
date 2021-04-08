@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -17,7 +18,7 @@ public class ProductManager {
     private NumberFormat moneyFormat;
 
     private Product product;
-    private Review review;
+    private Review[] reviews = new Review[5];
 
     public ProductManager() {
         this(Locale.getDefault());
@@ -43,9 +44,32 @@ public class ProductManager {
     }
 
     public Product reviewProduct(Product product, Rating rating, String comments) {
-        this.review = new Review(comments, rating);
-        this.product = product.applyRating(rating);
+        if (isReviewsFullCapacity()) {
+            increaseReviewsCapacity();
+        }
+
+        int sumRatings = 0, numReviews = 0;
+        boolean reviewed = false;
+        while (numReviews < reviews.length && !reviewed) {
+            if (reviews[numReviews] == null) {
+                reviews[numReviews] = new Review(comments, rating);
+                reviewed = true;
+            }
+
+            sumRatings += reviews[numReviews].getRating().ordinal();
+            numReviews++;
+        }
+
+        this.product = product.applyRating(Math.round((float) sumRatings / numReviews));
         return this.product;
+    }
+
+    private boolean isReviewsFullCapacity() {
+        return reviews[reviews.length - 1] != null;
+    }
+
+    private void increaseReviewsCapacity() {
+        reviews = Arrays.copyOf(reviews, reviews.length + 5);
     }
 
     public void printProductReport() {
@@ -56,13 +80,22 @@ public class ProductManager {
                 dateFormat.format(product.getBestBefore())))
             .append("\n");
         
-        String reviewMsg = review == null
-            ? bundle.getString("review.not")
-            : MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments());
-        buffer.append(reviewMsg)
-            .append("\n");
+
+        if (isEmptyReviews()) {
+            buffer.append(bundle.getString("review.not")).append("\n");
+        } else {
+            for (Review review: reviews) {
+                if (review != null) {
+                    buffer.append(MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments()))
+                        .append("\n");
+                }
+            }
+        }        
         
         System.out.println(buffer);
     }
 
+    private boolean isEmptyReviews() {
+        return reviews[0] == null;
+    }
 }
