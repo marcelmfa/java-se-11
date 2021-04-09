@@ -156,3 +156,9 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
   - Usar o Comparator para ordenar a lista de produtos;
 - Refatorar Shop para usar novo método de relatório customizado usando Lamba Expression.
   - (Opcional) Aglutinar multiplos Comparator's para obter a ordenação desejada.
+
+### 18. Migrando de Loops para Streams
+
+- Refatorar em ProductManager os métodos **findProduct**, **reviewProduct**, **printProductReport** e **printProducts**;
+- (Opcional) Sobrecarregar método **printProducts** passando um **Predicate** além do **Comparator** para filtrar os produtos;
+- (Opcional) Refatorar Shop usando o método acima.
