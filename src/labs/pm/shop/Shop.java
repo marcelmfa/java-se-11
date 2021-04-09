@@ -1,12 +1,10 @@
 package labs.pm.shop;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.function.Predicate;
 
-import labs.pm.data.Drink;
-import labs.pm.data.Food;
 import labs.pm.data.Product;
 import labs.pm.data.ProductManager;
 import labs.pm.data.Rating;
@@ -16,7 +14,7 @@ public class Shop {
 
         ProductManager pm = new ProductManager(Locale.US);
         pm.createProduct(1l, "Beer light", BigDecimal.valueOf(3.99), Rating.THREE_STARS);
-        //pm.printProductReport(1l);
+        pm.printProductReport(1l);
 
         pm.changeLocale(Locale.UK.toLanguageTag());
         pm.createProduct(2l, "Imperial Stout Beer", BigDecimal.valueOf(5.99), Rating.FOUR_STARS);
@@ -36,6 +34,9 @@ public class Shop {
         pm.printProducts(ratingDesc.thenComparing(nameAsc.reversed()));
         
         pm.printProducts(ratingDesc.thenComparing(nameAsc).reversed());
+
+        Predicate<Product> higherThreeStars = p -> p.getRating().ordinal() > 3;
+        pm.printProducts(higherThreeStars, nameAsc);
     }
 
 }

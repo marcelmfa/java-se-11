@@ -6,9 +6,8 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 17. Relatórios customizados
+### 18. Migrando de Loops para Streams
 
-- Criar método **printProducts** que recebe como parâmetro **Comparator<Product>**;
-  - Usar o Comparator para ordenar a lista de produtos;
-- Refatorar Shop para usar novo método de relatório customizado usando Lamba Expression.
-  - (Opcional) Aglutinar multiplos Comparator's para obter a ordenação desejada.
+- Refatorar em ProductManager os métodos **findProduct**, **reviewProduct**, **printProductReport** e **printProducts**;
+- (Opcional) Sobrecarregar método **printProducts** passando um **Predicate** além do **Comparator** para filtrar os produtos;
+- (Opcional) Refatorar Shop usando o método acima.

@@ -7,16 +7,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ProductManager {
 
@@ -65,24 +65,21 @@ public class ProductManager {
         products.remove(product, reviews);
         reviews.add(new Review(comments, rating));
 
-        int sumRatings = 0;
-        for (Review review: reviews) {
-            sumRatings += review.getRating().ordinal();
-        }
-
-        product = product.applyRating(Math.round((float) sumRatings / reviews.size()));
+        product = product.applyRating(
+            (int) Math.round(reviews.stream()
+                .mapToInt(r -> r.getRating().ordinal())
+                .average()
+                .orElse(0)));
         products.put(product, reviews);
         return product;
     }
 
     public Product findProduct(long id) {
-        Set<Product> keySet = products.keySet();
-        for (Product p : keySet) {
-            if (Objects.equals(id, p.getId())) {
-                return p;
-            }
-        }
-        return null;        
+        return products.keySet()
+            .stream()
+            .filter(p -> p.getId() == id)
+            .findFirst()
+            .orElseGet(() -> null);
     }
 
     public Product reviewProduct(long id, Rating rating, String comments) {
@@ -95,37 +92,48 @@ public class ProductManager {
 
     public void printProductReport(Product product) {
         List<Review> reviews = products.get(product);
+        Collections.sort(reviews);
+
         StringBuilder buffer = new StringBuilder()
             .append(formatter.formatProduct(product))
-            .append("\n");
-        
+            .append("\n");        
 
         if (reviews.isEmpty()) {
             buffer.append(formatter.formatNotReviewed()).append("\n");
         } else {
             
-            Collections.sort(reviews);
-
-            for (Review review: reviews) {
-                buffer.append(formatter.formatReview(review))
-                    .append("\n");
-            }
+            buffer.append(reviews.stream()
+                .map(r -> formatter.formatReview(r) + "\n")
+                .collect(Collectors.joining())
+            );
         }        
         
         System.out.println(buffer);
     }
 
     public void printProducts(Comparator<Product> productComparator) {
-        List<Product> sortedProducts = new ArrayList<>(products.keySet());
-        sortedProducts.sort(productComparator);
-        
-        StringBuilder buffer = new StringBuilder();
-        for (Product product: sortedProducts) {
-            buffer.append(formatter.formatProduct(product))
-                .append("\n");
-        }
+        StringBuilder buffer = new StringBuilder()
+            .append(products.keySet()
+                .stream()
+                .sorted(productComparator)
+                .map(p -> formatter.formatProduct(p) + "\n")
+                .collect(Collectors.joining())
+            );
 
         System.out.println(buffer);
+    }
+
+    public void printProducts(Predicate<Product> filter, Comparator<Product> productComparator) {
+        StringBuilder buffer = new StringBuilder()
+            .append(products.keySet()
+                .stream()
+                .filter(filter)
+                .sorted(productComparator)
+                .map(p -> formatter.formatProduct(p) + "\n")
+                .collect(Collectors.joining())
+            );
+
+        System.out.println(buffer);        
     }
 
     public static class ResourceFormatter {
