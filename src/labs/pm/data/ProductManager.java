@@ -19,24 +19,31 @@ import java.util.Set;
 
 public class ProductManager {
 
-    private Locale locale;
-    private ResourceBundle bundle;
-    private DateTimeFormatter dateFormat;
-    private NumberFormat moneyFormat;
-
     private Map<Product, List<Review>> products = new HashMap<>();
+    private ResourceFormatter formatter;
 
-    public ProductManager() {
-        this(Locale.getDefault());
-    }
+    private static Map<String, ResourceFormatter> formatters = Map.of(
+        "en-GB", new ResourceFormatter(Locale.UK),
+        "en-US", new ResourceFormatter(Locale.US),
+        "fr-FR", new ResourceFormatter(Locale.FRANCE),
+        "ru-RU", new ResourceFormatter(new Locale("ru", "RU")),
+        "zh-CN", new ResourceFormatter(Locale.CHINA)
+    );
 
     public ProductManager(Locale locale) {
-        this.locale = locale;
+        changeLocale(locale.toLanguageTag());
+    }
 
-        bundle = ResourceBundle.getBundle("labs.pm.data.resources", this.locale);
-        dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
-            .localizedBy(this.locale);
-        moneyFormat = NumberFormat.getCurrencyInstance(this.locale);
+    public ProductManager(String languageTag) {
+        changeLocale(languageTag);
+    }
+
+    public void changeLocale(String languageTag) {
+        formatter = formatters.getOrDefault(languageTag, formatters.get("en-GB"));
+    }
+
+    public Set<String> getSupportedLocales() {
+        return formatters.keySet();
     }
     
     public Product createProduct(long id, String name, BigDecimal price, Rating rating) {
@@ -88,26 +95,56 @@ public class ProductManager {
     public void printProductReport(Product product) {
         List<Review> reviews = products.get(product);
         StringBuilder buffer = new StringBuilder()
-            .append(MessageFormat.format(bundle.getString("product"), 
-                product.getName(), moneyFormat.format(product.getPrice()),
-                product.getRating().getStars(),
-                dateFormat.format(product.getBestBefore())))
+            .append(formatter.formatProduct(product))
             .append("\n");
         
 
         if (reviews.isEmpty()) {
-            buffer.append(bundle.getString("review.not")).append("\n");
+            buffer.append(formatter.formatNotReviewed()).append("\n");
         } else {
             
             Collections.sort(reviews);
 
             for (Review review: reviews) {
-                buffer.append(MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments()))
+                buffer.append(formatter.formatReview(review))
                     .append("\n");
             }
         }        
         
         System.out.println(buffer);
+    }
+
+    public static class ResourceFormatter {
+
+        private Locale locale;
+        private ResourceBundle bundle;
+        private DateTimeFormatter dateFormat;
+        private NumberFormat moneyFormat;
+        
+        public ResourceFormatter(Locale locale) {
+            this.locale = locale;
+
+            bundle = ResourceBundle.getBundle("labs.pm.data.resources", this.locale);
+            dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+                .localizedBy(this.locale);
+            moneyFormat = NumberFormat.getCurrencyInstance(this.locale);
+        }
+
+        public String formatProduct(Product product) {
+            return MessageFormat.format(bundle.getString("product"), 
+                product.getName(), moneyFormat.format(product.getPrice()),
+                product.getRating().getStars(),
+                dateFormat.format(product.getBestBefore()));
+        }
+
+        public String formatNotReviewed() {
+            return bundle.getString("review.not");
+        }
+
+        public String formatReview(Review review) {
+            return MessageFormat.format(bundle.getString("review.done"), 
+                review.getRating().getStars(), review.getComments());
+        }
     }
 
 }
