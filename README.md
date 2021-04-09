@@ -149,3 +149,10 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
     - O parametro String é tag de linguagem (languageTag) que tem como convenção ser formada por idioma e país, como "pt-BR";
   - Refatorar método **printProductReport** para usar a classe nova;
 - Refatorar Shop permitindo uso de unico ProductManager e modificando o Locale.
+
+### 17. Relatórios customizados
+
+- Criar método **printProducts** que recebe como parâmetro **Comparator<Product>**;
+  - Usar o Comparator para ordenar a lista de produtos;
+- Refatorar Shop para usar novo método de relatório customizado usando Lamba Expression.
+  - (Opcional) Aglutinar multiplos Comparator's para obter a ordenação desejada.
