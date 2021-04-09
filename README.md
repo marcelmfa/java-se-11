@@ -6,9 +6,10 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 13. Permitindo múltiplas resenhas para um produto
+### 14. Organizar Produtos e Review em um HashMap
 
-- Modificar em ProductManager a propriedade **review** de objeto para array;
-- Refatorar o método **reviewProduct** para incluir os reviews no array e com funcionalidade de autoscaling deste array;
-- Refatorar para aplicar a média das avaliações como avaliação final em Product;
-- Refatorar **printProductReport** já que é um array de Review's.
+- Refatorar ProductManager: 
+  - Remover as variáveis **product** e **reviews**;
+  - Criar uma variável **products** do tipo *HashMap* que irá conter o Product e seus Review's associados;
+  - Refatorar demais métodos impactados com esta mudança, mas mantendo as mesmas funcionalidades;
+  - Refatorar o **printProductReport** informando o produto que deseja ter o relatório.

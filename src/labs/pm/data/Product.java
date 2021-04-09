@@ -3,6 +3,7 @@ package labs.pm.data;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class Product implements Rateable<Product> {
 
@@ -76,7 +77,7 @@ public abstract class Product implements Rateable<Product> {
         // Checking inheritance only
         if (obj instanceof Product) {
             final Product other = (Product) obj;
-            return this.id == other.id;
+            return this.id == other.id && Objects.equals(this.name, other.name);
         }        
         return false;
     }
