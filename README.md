@@ -6,10 +6,11 @@ Exercícios para certificação Java 11
 
 Criar projeto para simular uma compra de produtos. Serão criadas *branches* de solução para cada subseção a seguir.
 
-### 14. Organizar Produtos e Review em um HashMap
+### 15. Implementação ordenação e busca
 
-- Refatorar ProductManager: 
-  - Remover as variáveis **product** e **reviews**;
-  - Criar uma variável **products** do tipo *HashMap* que irá conter o Product e seus Review's associados;
-  - Refatorar demais métodos impactados com esta mudança, mas mantendo as mesmas funcionalidades;
-  - Refatorar o **printProductReport** informando o produto que deseja ter o relatório.
+- Alterar Review para implementar a interface **Comparable**;
+  - Implementar comparação considerando os ratings em ordem decrescente;
+- Alterar **printProductReport** com os review's ordenados;
+- Implementar método **findProduct** passando o id como parametro;
+- Sobrecarregar os métodos **reviewProduct** e **printProductReport** passando o id de Product ao invés do objeto Product;
+- Refatorar Shop passando os id's ao invés de objetos.

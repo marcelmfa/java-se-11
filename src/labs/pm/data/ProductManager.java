@@ -8,11 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class ProductManager {
 
@@ -64,6 +67,24 @@ public class ProductManager {
         return product;
     }
 
+    public Product findProduct(long id) {
+        Set<Product> keySet = products.keySet();
+        for (Product p : keySet) {
+            if (Objects.equals(id, p.getId())) {
+                return p;
+            }
+        }
+        return null;        
+    }
+
+    public Product reviewProduct(long id, Rating rating, String comments) {
+        return reviewProduct(findProduct(id), rating, comments);
+    }
+
+    public void printProductReport(long id) {
+        printProductReport(findProduct(id));
+    }
+
     public void printProductReport(Product product) {
         List<Review> reviews = products.get(product);
         StringBuilder buffer = new StringBuilder()
@@ -77,6 +98,9 @@ public class ProductManager {
         if (reviews.isEmpty()) {
             buffer.append(bundle.getString("review.not")).append("\n");
         } else {
+            
+            Collections.sort(reviews);
+
             for (Review review: reviews) {
                 buffer.append(MessageFormat.format(bundle.getString("review.done"), review.getRating().getStars(), review.getComments()))
                     .append("\n");

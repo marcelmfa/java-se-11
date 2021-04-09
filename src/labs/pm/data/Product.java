@@ -77,7 +77,11 @@ public abstract class Product implements Rateable<Product> {
         // Checking inheritance only
         if (obj instanceof Product) {
             final Product other = (Product) obj;
-            return this.id == other.id && Objects.equals(this.name, other.name);
+            // Comparing based on id and name
+            // return this.id == other.id && Objects.equals(this.name, other.name);
+
+            // Checking id only
+            return this.id == other.id;
         }        
         return false;
     }
