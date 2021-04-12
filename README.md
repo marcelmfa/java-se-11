@@ -162,3 +162,8 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Refatorar em ProductManager os métodos **findProduct**, **reviewProduct**, **printProductReport** e **printProducts**;
 - (Opcional) Sobrecarregar método **printProducts** passando um **Predicate** além do **Comparator** para filtrar os produtos;
 - (Opcional) Refatorar Shop usando o método acima.
+
+### 19. Mais Streams (part 2)
+
+- Criar método **getDiscounts** que irá agrupar os descontos por rating e somá-los;
+- Refatorar Shop para usar o método criado.
