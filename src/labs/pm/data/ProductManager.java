@@ -16,9 +16,13 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ProductManager {
+
+    private static final Logger LOG = Logger.getLogger(ProductManager.class.getName());
 
     private Map<Product, List<Review>> products = new HashMap<>();
     private ResourceFormatter formatter;
@@ -74,20 +78,31 @@ public class ProductManager {
         return product;
     }
 
-    public Product findProduct(long id) {
+    public Product findProduct(long id) throws ProductManagerException {
         return products.keySet()
             .stream()
             .filter(p -> p.getId() == id)
             .findFirst()
-            .orElseGet(() -> null);
+            .orElseThrow(() -> new ProductManagerException("Product with id " + id + " not found!"));
+            // retornar null quando não encontrado
+            //.orElseGet(() -> null);
     }
 
     public Product reviewProduct(long id, Rating rating, String comments) {
-        return reviewProduct(findProduct(id), rating, comments);
+        try {
+            return reviewProduct(findProduct(id), rating, comments);
+        } catch (ProductManagerException e) {
+            LOG.log(Level.INFO, null, e);
+        }
+        return null;
     }
 
     public void printProductReport(long id) {
-        printProductReport(findProduct(id));
+        try {
+            printProductReport(findProduct(id));
+        } catch (ProductManagerException e) {
+            LOG.log(Level.INFO, null, e);
+        }
     }
 
     public void printProductReport(Product product) {
