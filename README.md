@@ -167,3 +167,11 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 
 - Criar método **getDiscounts** que irá agrupar os descontos por rating e somá-los;
 - Refatorar Shop para usar o método criado.
+
+### 20. Utilizando controle de exceções
+
+- Criar exceção **ProductManagerException**;
+- Refatorar **findProduct** para lançar a exceção acima caso o produto não seja encontrado;
+- Tratar as excecões em **reviewProduct** e **printProductReport**;
+- Criar uma variável de classe do tipo **Logger** para utilizar nos *catches*;
+- (Opcional) Executar em Shop os método **reviewProduct** e **printProductReport** de ProductManager e verificar o comportamento.
