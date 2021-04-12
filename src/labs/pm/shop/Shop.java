@@ -37,6 +37,9 @@ public class Shop {
 
         Predicate<Product> higherThreeStars = p -> p.getRating().ordinal() > 3;
         pm.printProducts(higherThreeStars, nameAsc);
+
+        pm.getDiscounts()
+            .forEach((rating, discount) -> System.out.println(rating + "\t" + discount));
     }
 
 }
