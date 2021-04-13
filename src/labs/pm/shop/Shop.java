@@ -40,6 +40,15 @@ public class Shop {
 
         pm.getDiscounts()
             .forEach((rating, discount) -> System.out.println(rating + "\t" + discount));
+        
+        pm.parseProduct("X,4,Coffee,0.5,4,"); // wrong type
+        pm.parseProduct("D,X,Coffee,0.5,4,"); // wrong id
+        pm.parseProduct("D,X,Coffee,0.5,X,"); // wrong rating
+        pm.parseProduct("D,4,Coffee,0.5,4,"); // OK!
+
+        pm.parseReview("4,5,Usual everyday drink");
+
+        // TODO Parse a food string
     }
 
 }

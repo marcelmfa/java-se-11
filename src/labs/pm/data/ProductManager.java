@@ -3,8 +3,10 @@ package labs.pm.data;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +28,7 @@ public class ProductManager {
 
     private Map<Product, List<Review>> products = new HashMap<>();
     private ResourceFormatter formatter;
+    private ResourceParser parser;
 
     private static Map<String, ResourceFormatter> formatters = Map.of(
         "en-GB", new ResourceFormatter(Locale.UK),
@@ -35,11 +38,17 @@ public class ProductManager {
         "zh-CN", new ResourceFormatter(Locale.CHINA)
     );
 
+    private ProductManager() {        
+        parser = new ResourceParser();
+    }
+
     public ProductManager(Locale locale) {
+        this();
         changeLocale(locale.toLanguageTag());
     }
 
     public ProductManager(String languageTag) {
+        this();
         changeLocale(languageTag);
     }
 
@@ -76,6 +85,45 @@ public class ProductManager {
                 .orElse(0)));
         products.put(product, reviews);
         return product;
+    }
+
+    public void parseReview(String input) {
+        try {
+            Object[] reviewAsObjArray = parser.review(input);
+            Rating rating = Rateable.convert(Integer.parseInt((String) reviewAsObjArray[1]));
+            String comments = (String) reviewAsObjArray[2];
+            reviewProduct(Integer.parseInt((String) reviewAsObjArray[0]), 
+                rating, comments);
+            LOG.info(() -> "Review applied " + rating.getStars() + " " + comments);
+        } catch (ParseException | NumberFormatException e) {
+            LOG.log(Level.WARNING, () -> "Error parsing review " + input);
+        }
+    }
+
+    public void parseProduct(String input) {
+        try {
+            Object[] productAsObjArray = parser.product(input);
+            String productType = (String) productAsObjArray[0];
+            Long id = Long.valueOf((String) productAsObjArray[1]);
+            String name = (String) productAsObjArray[2];
+            BigDecimal price = new BigDecimal((String) productAsObjArray[3]);
+            Rating rating = Rateable.convert(Integer.parseInt((String) productAsObjArray[4]));
+            switch (productType) {
+                case "D":
+                    Product p = createProduct(id, name, price, rating);
+                    LOG.info(() -> "Product created: " + p);
+                    break;
+                case "F":
+                    LocalDate bestBefore = LocalDate.parse((String) productAsObjArray[5]);
+                    p = createProduct(id, name, price, rating, bestBefore);
+                    LOG.info(() -> "Product created: " + p);
+                    break;
+                default:
+                    LOG.warning(() -> "Product type " + productType + " not found!");
+            }
+        } catch (ParseException | NumberFormatException | DateTimeParseException e) {
+            LOG.log(Level.WARNING, () -> "Error parsing product " + input);
+        }
     }
 
     public Product findProduct(long id) throws ProductManagerException {
@@ -196,4 +244,24 @@ public class ProductManager {
         }
     }
 
+    public static class ResourceParser {
+
+        private ResourceBundle bundle;
+        private MessageFormat reviewFormat;
+        private MessageFormat productFormat;
+        
+        public ResourceParser() {
+            bundle = ResourceBundle.getBundle("labs.pm.data.config");
+            reviewFormat = new MessageFormat(bundle.getString("review.data.format"));
+            productFormat = new MessageFormat(bundle.getString("product.data.format"));
+        }
+        
+        public Object[] review(String input) throws ParseException {
+            return reviewFormat.parse(input);
+        }
+
+        public Object[] product(String input) throws ParseException {
+            return productFormat.parse(input);
+        }
+    }
 }
