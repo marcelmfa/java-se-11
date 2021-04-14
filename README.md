@@ -193,3 +193,6 @@ Criar projeto para simular uma compra de produtos. Serão criadas *branches* de 
 - Criar funcionalidade semelhante para Product, isto é, criar método **parseProduct** com parametro String;
 - Realizar tratamento de exceção considerando **ParseException**, **NumberFormatException** e **DateTimeParseException**;
 - Refatorar Shop e criar vários produtos via String.
+
+> Os exercícios das seções 13 e 14 foram tirados da lista de exercícios, mas pode fazê-los se achar necessário.
+
